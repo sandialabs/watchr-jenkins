@@ -1,0 +1,11 @@
+<p style='border-bottom: 1px #DDDDDD solid; margin-bottom: 5px; margin-left: 10px; font-size: 14pt; font-weight: bold; font-variant: small-caps'><table style='margin-left: 10px' cellspacing='20' cellpadding='5'></p><tbody><tr><td style="width: 260px; height: 500px;"><div id="flotr-chart-outer-MyDiv1" align="right" style="padding: 20px; width:550px; height:650px; border: thin solid black;  background-color: #F0FFFF">
+<div class="test-trend-caption">MyDiv1</div><div id="flotr-chart-MyDiv1" style="width:450px;height:450px;display:table-cell; vertical-align:middle; text-align:center">
+<img src='/plugin/sems-jpp-plugin/noDataInTimeFrame.png'/></div><div class="test-trend-caption" ><div align='left' style="font-size:75%; text-align:write; width:400px; height:60px;" id="MyDiv1_MinMax"> </div>
+<div style='height:1px;font-size:1px;'>&nbsp;</div><div align='center' style='float:left;'><a href='?customViewMode=edit&currentCustomView=MyDiv1'><img width='32' height='32' src='/plugin/sems-jpp-plugin/edit.png'></a><a href='?customViewMode=deleteAsk&currentCustomView=MyDiv1'><img width='32' height='32' src='/plugin/sems-jpp-plugin/delete.png'></a></div><br></div>
+</td><td style="width: 260px; height: 500px;"><div id="custom-view-add-outer" align="right" style="padding: 20px; width:550px; height:650px; border: thin solid black;  background-color: #F0FFFF">
+<div class="test-trend-caption">Add New Custom View</div><div id="custom-view-add" style="width:450px;height:450px;display:table-cell; vertical-align:middle; text-align:center">
+<a href='?customViewMode=add'><img src='/plugin/sems-jpp-plugin/addButton.png'/></a></div>
+</div>
+</div>
+</td>
+</tr></tbody></table>

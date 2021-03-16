@@ -1,0 +1,30 @@
+<div class="pane-frame">
+<table id="graphSettings" class="pane" style="margin-top:0; border-top:none">
+<tr style="border-top:none; white-space: normal">
+<td>
+<h2 style="padding-top:20px;padding-left:20px;">Update Data Filter for </h2><form method="post" autocomplete="off" name="filterEditor"><table width="100%"><input type="hidden" id="Jenkins-Crumb" name="Jenkins-Crumb" value=""/><input type="hidden" id="crumbRequestField" name="crumbRequestField" value=""/><tr>
+<td><div class="pane-frame">
+<table id="filterTable" class="pane" style="margin-top:0; border-top:none">
+<tr style="border-top:none; white-space: normal">
+<td>
+<h2 style="padding-top:20px;padding-left:20px;">Filtered Dates</h2>
+</td></tr>
+<tr><td style="padding-left: 10px;"><div style="height:560px;width:400px;border:1px solid #ccc;overflow:auto;">
+<table id="filterTable_inner">
+</table></div></td></tr><tr><td><input name="save" type="submit" value="Save" class="submit-button" /></td></tr></table></div></td><td><div class="pane-frame">
+<table id="previewTable" class="pane" style="margin-top:0; border-top:none">
+<tr style="border-top:none; white-space: normal"><td>
+<h2 style="padding-top:20px;padding-left:20px;">Preview</h2>
+</td></tr>
+<tr><td style="width: 260px; height: 500px;"><div id="flotr-chart-outer-" align="right" style="padding: 20px; width:780px; height:600px; border: thin solid black;  background-color: #F0FFFF">
+<div class="test-trend-caption"></div><div id="flotr-chart-" style="width:680px;height:400px;display:table-cell; vertical-align:middle; text-align:center">
+<img src='/plugin/sems-jpp-plugin/noDataInTimeFrame.png'/></div><div class="test-trend-caption" ><div align='left' style="font-size:75%; text-align:write; width:400px; height:60px;" id="_MinMax"> </div>
+<div style='height:1px;font-size:1px;'>&nbsp;</div><div align='center' style='float:left;'></div><br></div>
+</td></tr></table></div></td></tr>
+</table>
+<div class="pane-frame" style="padding: 10px; margin: 5px;">
+Note:  Rolling average and rolling standard deviation lines are calculated at build time.  Filtered data points will not cause changes to these derived lines until the next build.</div>
+<table width="100%"><input name="saveAndClose" type="submit" value="Save and Close" class="submit-button" /></table></form>
+</td>
+</tr>
+</div>

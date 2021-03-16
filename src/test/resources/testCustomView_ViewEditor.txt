@@ -1,0 +1,39 @@
+<div class="pane-frame">
+<table id="graphSettings" class="pane" style="margin-top:0; border-top:none">
+<tr style="border-top:none; white-space: normal">
+<td>
+<h2 style="padding-top:20px;padding-left:20px;">Add New Custom View</h2><form method="post" autocomplete="off" name="viewBuilder" action="?customViewMode=add"><table width="100%"><input type="hidden" id="Jenkins-Crumb" name="Jenkins-Crumb" value=""/><input type="hidden" id="crumbRequestField" name="crumbRequestField" value=""/><tr>
+<td class="setting-leftspace"></td>
+<td class="setting-name" style="vertical-align:middle;">Name: </td>
+<td class="setting-main"><input class="setting-input" name="customViewFieldName" value="MyNewView"type="text" style="width: 600px;"></td><td/><td/><td class="setting-help"><a helpURL="/descriptor/gov.sandia.sems.jenkins.semsjppplugin.PerformanceRecorder/help/customViewFieldName" href="#" class="help-button"><img src="/static/4b908ff1/images/16x16/help.png" alt="Help for feature: Name: " style="width: 16px; height: 16px; " class="icon-help icon-sm" /></a></td></tr><tr class="help-area"><td/><td colspan="5"><div class="help">Label_2373894ing...</div></td><td/></tr><tr>
+<td class="setting-leftspace"></td>
+<td class="setting-name" style="vertical-align:middle;">Search: </td>
+<td class="setting-main"><input class="setting-input" name="customViewFieldSearchTerm" value="SearchTerm"type="text" style="width: 600px;"></td><td><select class="setting-input dropdownList" name ="searchStyle" style="width:300px;"><option value="name" selected >Search by name</option><option value="path"  >Search by full path</option></select></td><td class="setting-leftspace"><input type="submit"name="search"value="Search"class="submit-button" /></td><td class="setting-help"><a helpURL="/descriptor/gov.sandia.sems.jenkins.semsjppplugin.PerformanceRecorder/help/customViewFieldSearchTerm" href="#" class="help-button"><img src="/static/4b908ff1/images/16x16/help.png" alt="Help for feature: Search: " style="width: 16px; height: 16px; " class="icon-help icon-sm" /></a></td></tr><tr class="help-area"><td/><td colspan="5"><div class="help">Label_2373894ing...</div></td><td/></tr></table><table width="100%"><tr><td><div class="pane-frame">
+<table id="availableTable" class="pane" style="margin-top:0; border-top:none">
+<tr style="border-top:none; white-space: normal">
+<td colspan="3">
+<h2 style="padding-top:20px;padding-left:20px;">Available Datasets</h2>
+</td></tr>
+<tr><td><div style="height:600px;width:400px;border:1px solid #ccc;overflow:auto;">
+<table id="availableTable_inner">
+<tr>
+<td class="setting-leftspace"></td>
+<td><input class="setting-input" name="availableDataset~~~~_-_-_~~~~ - Value" value="true" type="checkbox" style="width: 10px;" ></td><td class="setting-main" style="vertical-align:middle;"> - Value</td>
+</tr><tr>
+<td class="setting-leftspace"></td>
+<td><input class="setting-input" name="availableDataset~~~~_-_-_~~~~ - Average" value="true" type="checkbox" style="width: 10px;" ></td><td class="setting-main" style="vertical-align:middle;"> - Average</td>
+</tr><tr>
+<td class="setting-leftspace"></td>
+<td><input class="setting-input" name="availableDataset~~~~_-_-_~~~~ - Std. Dev." value="true" type="checkbox" style="width: 10px;" ></td><td class="setting-main" style="vertical-align:middle;"> - Std. Dev.</td>
+</tr></table></div></tr></td><tr><td colspan="3"><input name="moveAvailable"type="submit" value="Label_2404337 to Selected"class="submit-button" /></td></tr></table></div></td><td><div class="pane-frame">
+<table id="selectedTable" class="pane" style="margin-top:0; border-top:none">
+<tr style="border-top:none; white-space: normal">
+<td colspan="3">
+<h2 style="padding-top:20px;padding-left:20px;">Selected Datasets</h2>
+</td></tr>
+<tr><td><div style="height:600px;width:400px;border:1px solid #ccc;overflow:auto;">
+<table id="selectedTable_inner">
+<tr>
+<td class="setting-leftspace"></td>
+<td><input class="setting-input" name="selectedDataset~~~~_-_-_~~~~Dataset1" value="true" type="checkbox" style="width: 10px;" ></td><td class="setting-main" style="vertical-align:middle;">Dataset1</td>
+</tr></table></div></tr></td><tr><td colspan="3"><input name="removeSelected"type="submit" value="Remove from Selected"class="submit-button" /></td></tr></table></div></td></tr></table><table width="100%"><input name="save"type="submit" value="Save"class="submit-button" /></table></form></td></tr></table></div>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <title>Visualizer</title>
+
+        <script type="text/javascript" src="../flotr/lib/prototype-1.6.0.2.js"></script>
+        <script type="text/javascript" src="examples.js"></script>
+        
+        <!--[if IE]>
+            <script type="text/javascript" src="../flotr/lib/excanvas.js"></script>
+            <script type="text/javascript" src="../flotr/lib/base64.js"></script>
+        <![endif]-->
+        <script type="text/javascript" src="../flotr/lib/canvas2image.js"></script>
+        <script type="text/javascript" src="../flotr/lib/canvastext.js"></script>
+        <script type="text/javascript" src="../flotr/flotr-0.2.0-alpha.js"></script>
+    </head>
+    <body>
+        
+        <!-- ad -->
+        
+        <div id="wrapper">
+            <h1></h1>
+            <div id="container" style="width:600px;height:300px;"></div>
+            <p><button id="reset-btn">Reset</button></p>
+        </div>
+        
+        <!-- ad -->
+        
+        <script type="text/javascript">
+            /**
+             * Wait till dom's finished loading.
+             */
+            document.observe('dom:loaded', function(){
+                /**
+                 * Fill series d1 and d2.
+                 */
+                                var total = 0;
+                                var average = 0;
+                                var deviationFromMean = [];
+                                var runningAverage = [];
+                var dataAndDate = [];
+                                var standardDeviationRunning = [];
+                                var standardDeviationArray = [];
+                                var variance = 0;
+                                var date = [20150101, 20150102 , 20150103 , 20150104 , 20150105 , 20150106 , 20150107, 20150108, 20150109, 20150110, 20150111 , 20150112 , 20150113 , 20150114 , 20150115, 20150116, 20150117, 20150118, 20150119,20150120,20150121,20150122,20150123,20150124,20150125,20150126,20150127,20150128,20150129,20150130,20150201,20150202,20150203,20150204,20150205,20150206,20150207,20150208,20150209,20150210,20150211,20150212,20150213,20150214,20150215]
+                                var data = [322, 345, 289, 270, 490, 351, 300 , 321 , 378, 450, 460, 203, 210, 211 , 259, 286 ,322, 345, 289, 270, 490, 351, 300 , 321 , 378, 450, 460, 203, 210, 211 , 259, 286 , 322, 345, 289, 270, 490, 351, 300 , 321 , 378, 450, 460, 203, 210, 211 , 259, 286 ]
+                    for(var j = 0; j < data.length; j += 1){
+                                        total += data[j];
+                                        average = (total/(j+1));
+                            dataAndDate.push([date[j], data[j]]);
+                                        runningAverage.push([date[j],average]);
+                }
+                                
+                                for ( var i = 30; i < j; i += 1){
+                                    deviationFromMean[i]= (data[i]-average);
+                                    variance += (deviationFromMean[i] * deviationFromMean[i]);
+                                }
+                                variance = variance / j;
+                                var standardDeviation = Math.sqrt(variance);
+                
+                                for (i = 0; i < j; i += 1){
+                                    standardDeviationArray.push([date[i] , (standardDeviation + average)]);
+                                }
+                /**
+                 * Global options object.
+                 */
+                var options = {
+                    selection:{mode:'x',fps:30},
+                                        mouse:{
+                        track: true,
+                        lineColor: 'purple',
+                        relative: true,
+                        position: 'ne',
+                        sensibility: 100, // => The smaller this value, the more precise you've to point
+                        trackDecimals: 2,
+                        trackFormatter: function(obj){ return 'x = ' + obj.x +', y = ' + obj.y; }
+                    }
+                };
+                
+                /**
+                 * Function displays a graph in the 'container' element, extending
+                 * the global options object with the optionally passed options.
+                 */
+                function drawGraph(opts){
+                    /**
+                     * Clone the options, so the 'options' variable always keeps intact.
+                     */
+                    var o = Object.extend(Object.clone(options), opts || {});
+                    /**
+                     * Return a new graph.
+                     */
+                    var f = Flotr.draw(
+                    $('container'), 
+                    [dataAndDate , runningAverage, standardDeviationArray],
+                                        o
+                );
+                        
+                                
+                }    
+                
+                /**
+                 * Actually draw the graph.
+                 */
+                var f = drawGraph();            
+                
+                /**
+                 * Hook into the 'flotr:select' event.
+                 */
+                $('container').observe('flotr:select', function(evt){
+                    /**
+                     * Get the selected area coordinates passed as event memo.
+                     */
+                    var area = evt.memo[0];
+                    
+                    /**
+                     * What happens: empty the container element, and draw a new 
+                     * graph with bounded axis. The axis correspond to the selection
+                     * you just made.
+                     */
+                    f = drawGraph({
+                        xaxis: {min:area.x1, max:area.x2},
+                        yaxis: {min:area.y1, max:area.y2}
+                    });
+                });
+                
+                /**
+                 * Observe click event on the reset-btn. Reset the graph when clicked.
+                 * The drawGraph function wrapped in another function otherwise it get's 
+                 * an Event object passed as first argument, while it expects an options
+                 * object.
+                 */
+                $('reset-btn').observe('click', function(){drawGraph()});
+            });            
+        </script>
+        
+        <!-- analytics -->
+        
+    </body>
+</html>

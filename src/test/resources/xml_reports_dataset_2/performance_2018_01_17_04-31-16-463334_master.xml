@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<performance-report date="2018-01-17T04:16:16" name="Label_-1979753640" time-units="seconds">
+    <timing end-time="2018-01-17 04:31:16" name="Label_2007833254">
+        <metadata key="codeBase" value="Aria" />
+        <metadata key="branch" value="master" />
+        <timing count="128" cpu-time-max="125.799" cpu-time-min="124.765" cpu-time-sum="16038.958" name="Label_2603186" parallel="true" wall-time-max="126.394" wall-time-min="126.277" wall-time-sum="16175.207">
+            <metric name="Label_80894" units="MB" value="581.9" />
+            <timing name="Label_2052636900">
+                <timing name="Label_908763827 myAria">
+                    <timing count="128" cpu-time-max="3.052" cpu-time-min="2.986" cpu-time-sum="388.453" name="Label_-1430411344" parallel="true" wall-time-max="3.057" wall-time-min="3.025" wall-time-sum="389.905">
+                    </timing>
+                    <timing count="128" cpu-time-max="117.053" cpu-time-min="116.575" cpu-time-sum="14956.503" name="Label_345083733" parallel="true" wall-time-max="117.145" wall-time-min="117.139" wall-time-sum="14994.359">
+                    </timing>
+                    <timing count="128" cpu-time-max="3.964" cpu-time-min="3.405" cpu-time-sum="478.127" name="Label_2394637 input" parallel="true" wall-time-max="4.045" wall-time-min="4.015" wall-time-sum="514.843">
+                    </timing>
+                    <timing count="12800" cpu-time-max="0.214" cpu-time-min="0.14" cpu-time-sum="24.006" name="Label_2394637 output" parallel="true" wall-time-max="0.226" wall-time-min="0.218" wall-time-sum="28.821">
+                    </timing>
+                    <timing name="Label_-1850928364 AriaCVFEM">
+                        <timing count="128" cpu-time-max="3.051" cpu-time-min="2.985" cpu-time-sum="388.379" name="Label_-1430411344" parallel="true" wall-time-max="3.056" wall-time-min="3.025" wall-time-sum="389.831">
+                        </timing>
+                        <timing count="6400" cpu-time-max="115.634" cpu-time-min="115.125" cpu-time-sum="14771.044" name="Label_345083733" parallel="true" wall-time-max="115.589" wall-time-min="115.58" wall-time-sum="14794.502">
+                            <timing count="19200" cpu-time-max="102.582" cpu-time-min="102.129" cpu-time-sum="13101.379" name="Label_-1330623470 Iteration" parallel="true" wall-time-max="102.492" wall-time-min="102.426" wall-time-sum="13117.94">
+                                <timing count="19200" cpu-time-max="38.947" cpu-time-min="38.611" cpu-time-sum="4956.004" name="Label_-2018821476 Assembly" parallel="true" wall-time-max="38.79" wall-time-min="38.782" wall-time-sum="4964.597">
+                                </timing>
+                                <timing count="19200" cpu-time-max="56.108" cpu-time-min="55.798" cpu-time-sum="7152.767" name="Label_-2018821476 Label_80066591" parallel="true" wall-time-max="55.928" wall-time-min="55.921" wall-time-sum="7158.439">
+                                </timing>
+                                <timing count="19200" cpu-time-max="0.959" cpu-time-min="0.487" cpu-time-sum="89.174" name="Label_-2018821476 Label_-719167842" parallel="true" wall-time-max="0.958" wall-time-min="0.487" wall-time-sum="89.178">
+                                </timing>
+                                <timing count="76800" cpu-time-max="6.016" cpu-time-min="5.881" cpu-time-sum="761.843" name="Label_-1330623470 Label_-1116154134" parallel="true" wall-time-max="6.019" wall-time-min="5.906" wall-time-sum="764.197">
+                                </timing>
+                            </timing>
+                            <timing count="19584" cpu-time-max="0.001" cpu-time-min="0.0" cpu-time-sum="0.03" name="Label_95898579" parallel="true" wall-time-max="0.001" wall-time-min="0.0" wall-time-sum="0.041">
+                            </timing>
+                            <timing count="154368" cpu-time-max="7.241" cpu-time-min="6.068" cpu-time-sum="849.309" name="Label_-1116154134" parallel="true" wall-time-max="7.252" wall-time-min="6.11" wall-time-sum="852.963">
+                                <timing count="212096" cpu-time-max="1.693" cpu-time-min="0.173" cpu-time-sum="95.604" name="Label_1236046375 Sync" parallel="true" wall-time-max="1.689" wall-time-min="0.174" wall-time-sum="94.931">
+                                </timing>
+                            </timing>
+                            <timing count="38528" cpu-time-max="0.003" cpu-time-min="0.001" cpu-time-sum="0.204" name="Label_-1607036796 Label_-1116154134" parallel="true" wall-time-max="0.004" wall-time-min="0.002" wall-time-sum="0.346">
+                            </timing>
+                            <timing count="19200" cpu-time-max="0.003" cpu-time-min="0.0" cpu-time-sum="0.086" name="Label_-1678787584 Search" parallel="true" wall-time-max="0.001" wall-time-min="0.0" wall-time-sum="0.048">
+                            </timing>
+                        </timing>
+                        <timing count="128" cpu-time-max="3.964" cpu-time-min="3.405" cpu-time-sum="478.125" name="Label_2394637 input" parallel="true" wall-time-max="4.045" wall-time-min="4.015" wall-time-sum="514.843">
+                        </timing>
+                        <timing count="12800" cpu-time-max="0.214" cpu-time-min="0.14" cpu-time-sum="23.994" name="Label_2394637 output" parallel="true" wall-time-max="0.226" wall-time-min="0.218" wall-time-sum="28.809">
+                            <timing count="12928" cpu-time-max="0.219" cpu-time-min="0.108" cpu-time-sum="20.736" name="Label_-1532767274 output" parallel="true" wall-time-max="0.309" wall-time-min="0.238" wall-time-sum="33.886">
+                            </timing>
+                            <timing count="12928" cpu-time-max="0.001" cpu-time-min="0.0" cpu-time-sum="0.03" name="Label_-1532807697 output" parallel="true" wall-time-max="0.0" wall-time-min="0.0" wall-time-sum="0.032">
+                            </timing>
+                            <timing count="12928" cpu-time-max="0.001" cpu-time-min="0.0" cpu-time-sum="0.018" name="Label_-1703379852 output" parallel="true" wall-time-max="0.0" wall-time-min="0.0" wall-time-sum="0.014">
+                            </timing>
+                            <timing count="12928" cpu-time-max="0.001" cpu-time-min="0.0" cpu-time-sum="0.015" name="Label_-2090102564 output" parallel="true" wall-time-max="0.0" wall-time-min="0.0" wall-time-sum="0.012">
+                            </timing>
+                            <timing count="256" cpu-time-max="0.002" cpu-time-min="0.0" cpu-time-sum="0.237" name="Label_-1678770883" parallel="true" wall-time-max="0.002" wall-time-min="0.001" wall-time-sum="0.246">
+                            </timing>
+                            <timing count="12928" cpu-time-max="0.001" cpu-time-min="0.0" cpu-time-sum="0.011" name="Label_86016 output" parallel="true" wall-time-max="0.0" wall-time-min="0.0" wall-time-sum="0.015">
+                            </timing>
+                        </timing>
+                    </timing>
+                </timing>
+            </timing>
+            <timing count="128" cpu-time-max="1.846" cpu-time-min="1.564" cpu-time-sum="215.084" name="Label_65502937" parallel="true" wall-time-max="2.176" wall-time-min="2.059" wall-time-sum="275.287">
+                <timing count="128" cpu-time-max="1.846" cpu-time-min="1.564" cpu-time-sum="215.072" name="Label_65502937--parse" parallel="true" wall-time-max="2.176" wall-time-min="2.059" wall-time-sum="275.286">
+                </timing>
+                <timing count="128" cpu-time-max="124.047" cpu-time-min="123.07" cpu-time-sum="15823.784" name="Label_65502937--Label_2052636900--execute" parallel="true" wall-time-max="124.218" wall-time-min="124.218" wall-time-sum="15899.843">
+                </timing>
+            </timing>
+        </timing>
+    </timing>
+</performance-report>

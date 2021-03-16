@@ -1,0 +1,7 @@
+<p style='border-bottom: 1px #DDDDDD solid; margin-bottom: 5px; margin-left: 10px; font-size: 14pt; font-weight: bold; font-variant: small-caps'><table style='margin-left: 10px' cellspacing='20' cellpadding='5'></p><tbody><tr><td style="width: 260px; height: 500px;"><div id="custom-view-add-outer" align="right" style="padding: 20px; width:550px; height:650px; border: thin solid black;  background-color: #F0FFFF">
+<div class="test-trend-caption">Add New Custom View</div><div id="custom-view-add" style="width:450px;height:450px;display:table-cell; vertical-align:middle; text-align:center">
+<a href='?customViewMode=add'><img src='/plugin/sems-jpp-plugin/addButton.png'/></a></div>
+</div>
+</div>
+</td>
+</tr></tbody></table>

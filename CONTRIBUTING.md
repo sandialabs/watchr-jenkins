@@ -1,18 +1,18 @@
 ## Clean Master Branch Policy
 
-The watchr-jenkins project follows a **clean master branch policy**.  That is, one should be able to create a stable tag using the master branch at any time.  All unstable/in-progress work goes onto **development branches**.
+The watchr-core project follows a **clean master branch policy**.  That is, one should be able to create a stable tag using the master branch at any time.  All unstable/in-progress work goes onto **development branches**.
 
 ## Best Practice for Developing as Watchr Team Member
 
-The lead for watchr-jenkins (currently Elliott Ridgway) will create development branches that can be used for core development of new features on Watchr.  To use these branches locally, simply type:
+The lead for watchr-core (currently Elliott Ridgway) will create development branches that can be used for core development of new features on Watchr.  To use these branches locally, simply type:
 1. git checkout origin/\<the name of the development branch\>
 2. git pull origin/\<the name of the development branch\>
 
 ## Best Practice for Contributing a Code Change to Watchr
 
-If you are not a watchr-jenkins team member but would like to contribute a code change, you can fork the repo and work out of your own Gitlab project space:
+If you are not a watchr-core team member but would like to contribute a code change, you can fork the repo and work out of your own Gitlab project space:
 
-1. From https://gitlab-ex.sandia.gov/SEMS/jenkins_performance_plugin, create a fork of the project by clicking the `Fork` button.
+1. From https://gitlab-ex.sandia.gov/SEMS/watchr-core, create a fork of the project by clicking the `Fork` button.
 
 2. Clone your forked copy to your local workstation, replacing:
    - \<forked Git URL\> with the repository URL from the forked repository, e.g., git@gitlab-ex.sandia.gov:\<username\>/jenkins_performance_plugin.git

@@ -1,8 +1,0 @@
-<div class="pane-frame">
-<table id="graphSettings" class="pane" style="margin-top:0; border-top:none">
-<tr style="border-top:none; white-space: normal"><td>
-<h2 style="padding-top:20px;padding-left:20px;">Delete View</h2></td></tr>
-<tr><td style="padding-left:25px;">
-Are you sure you want to delete MyNewView?  This is not reversible.<br></td></tr>
-<tr><td style="padding-left:25px;">
-<form method="post" action="?customViewMode=delete"><button type="submit" class="submit-button primary">Yes</button></form></td></tr></table></div>

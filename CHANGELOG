@@ -1,105 +1,128 @@
-WATCHR
+WATCHR-JENKINS
 Release Notes
 
-2.6.1 (3/16/2021)
------------------
+3.1.0 (TBD)
+------------------
+
+3.0.0 (2021-04-22)
+------------------
+The April 2021 release of Watchr marks several major changes.  This project will now be referred to as "watchr-jenkins",
+to indicate that it is a separate, distinct project from the core Watchr functionality, maintained in a separate
+"watchr-core" repository.  This project is now a thinner front-end around Watchr's core functionality which enables it as
+a Jenkins plugin.
+
+There have also been several changes to how to work with Watchr in Jenkins:
+    - The build configuration options for Watchr have changed dramatically.  Almost all Watchr functionality is set through
+      a config JSON file, which can be provided either as an in-place text blob in Jenkins, or through a workspace file
+      reference.
+    - Watchr now uses plotly.js to display its line plots.
+    - The concept of performance report "views" have been removed.  The difference between an automatically-generated plot
+      and a view plot has been eliminated, thanks to the design of plot configurations in the main configuration JSON file.
+    - The frontend filter options have been removed as well, but point-based filtering is still available through the
+      main configuration file.    
+    - Top-level logic for working with rolling average and rolling standard deviation lines have been removed.  These are
+      now handled generically through the configuration file.
+    - Watchr graphs can now be exported to static, standalone HTML files once the job has finished running.
+
+2.6.1 (2021-03-16)
+------------------
 The March 2021 release of Watchr does not contain any feature enhancements or bugfixes.  Instead, it is simply version 2.6.0
 prepared for open-source release (copyright headers at the tops of all source code files, updated test files and associated
 documentation, etc.).  This release is simply a temporary resolution to make Watchr publicly available until we can
 get version 3.0.0 completed and open-sourced.
 
-2.6.0 (1/18/2021)
------------------
+2.6.0 (2021-01-18)
+------------------
 The January 2021 release of Watchr contains a number of bugfixes.  New feature development has migrated to a 3.0.0 branch
 of Watchr, which represents a major overhaul of Watchr functionality that will enable more flexible graph configurations.
 We will continue to maintain backwards compatibility for 2.x versions of Watchr via bugfix releases like this one.
-	- For security reasons, newer versions of Jenkins require "crumb" information to be sent within Stapler requests.
-	  This version of Watchr now sends the correct information when using the Performance Report Display Configuration
-	  area to update a page.
-	- Fixed a bug that would cause Watchr to fail to load graphs if the chosen display measurable contained capital letters.
+    - For security reasons, newer versions of Jenkins require "crumb" information to be sent within Stapler requests.
+      This version of Watchr now sends the correct information when using the Performance Report Display Configuration
+      area to update a page.
+    - Fixed a bug that would cause Watchr to fail to load graphs if the chosen display measurable contained capital letters.
 
-2.5.0 (9/30/2020)
------------------
+2.5.0 (2020-09-30)
+------------------
 The September 2020 release of Watchr contains a number of notable new features and bugfixes.
-	- The <metadata> element from Watchr performance report files is now rendered on graphs as hover text.
-	  There are two options for getting metadata to display on a specific graph.  You can either specify "global metadata"
-	  at the top of the performance report file, in which case this metadata element will be applied to every child
-	  graph on that date.  Alternately, you can specify graph-specific metadata by placing a metadata element underneath
-	  the appropriate graph element (either <timing> or <metric>) in the hierarchy of the performance report file.
-	- Paging has been implemented for graph viewing.  This was done to prevent a large number of graphs from being rendered
-	  on one page and causing a slow page load.  Now, a maximum of 15 graphs will be loaded at a time, with subsequent
-	  graphs being relegated to other pages.
-	- Scientific notation is now applied on graph hover text for extremely large or extremely small values.
-	- More flexible range of characters allowed for names of custom view graphs.
-	- An error message is shown when no graph data can be displayed (instead of going to a blank page).
+    - The <metadata> element from Watchr performance report files is now rendered on graphs as hover text.
+      There are two options for getting metadata to display on a specific graph.  You can either specify "global metadata"
+      at the top of the performance report file, in which case this metadata element will be applied to every child
+      graph on that date.  Alternately, you can specify graph-specific metadata by placing a metadata element underneath
+      the appropriate graph element (either <timing> or <metric>) in the hierarchy of the performance report file.
+    - Paging has been implemented for graph viewing.  This was done to prevent a large number of graphs from being rendered
+      on one page and causing a slow page load.  Now, a maximum of 15 graphs will be loaded at a time, with subsequent
+      graphs being relegated to other pages.
+    - Scientific notation is now applied on graph hover text for extremely large or extremely small values.
+    - More flexible range of characters allowed for names of custom view graphs.
+    - An error message is shown when no graph data can be displayed (instead of going to a blank page).
 
-2.4.0 (5/4/2020)
------------------
+2.4.0 (2020-05-04)
+------------------
 The April 2020 release of Watchr contains a number of notable new features and bugfixes.
-	- Data points can arbitrarily be filtered from view on graphs.  In addition, Watchr can be configured to ignore
-	  filtered data points when calculating derived lines (rolling average and rolling standard deviation).
-	- For custom views, data lines are not shown on legends if the line has no data to display.
-	- Performance:  For those building Watchr from source, unit tests have been made dramatically more efficient,
-	  cutting down on overall build time.
+    - Data points can arbitrarily be filtered from view on graphs.  In addition, Watchr can be configured to ignore
+      filtered data points when calculating derived lines (rolling average and rolling standard deviation).
+    - For custom views, data lines are not shown on legends if the line has no data to display.
+    - Performance:  For those building Watchr from source, unit tests have been made dramatically more efficient,
+      cutting down on overall build time.
 
-2.3.0 (2/17/2020)
+2.3.0 (2020-02-17)
 -----------------
 The February 2020 release of Watchr marks a huge step forward in functionality for the plugin.
-	- You now have the ability to define your own custom graphs (referred to as "views", similar to database views)
-	  using arbitrarily-combined lines of data.  Refer to the Gitlab wiki documentation for more specific instructions on how
-	  to create your own custom views.
-	- Fixed a bug:  Graph display configuration is now per-job, so changing display settings on one job will not
-	  impact other jobs.
+    - You now have the ability to define your own custom graphs (referred to as "views", similar to database views)
+      using arbitrarily-combined lines of data.  Refer to the Gitlab wiki documentation for more specific instructions on how
+      to create your own custom views.
+    - Fixed a bug:  Graph display configuration is now per-job, so changing display settings on one job will not
+      impact other jobs.
 
-2.2.0 (12/17/2019)
+2.2.0 (2019-12-17)
 ------------------
 A handful of important features and bugfixes were added to the December 2019 version of Watchr.
-	- More robust support for importing performance reports from various types of JSON schema.
-	- You can no longer toggle the offset for the rolling standard deviation line.  Instead, the standard deviation
-	  line is always drawn as an offset from the rolling average line at every point along the line.
-	- The "Range to Display" value now measures individual data points, rather than calendar days.
-	- Each graph now provides a small vertical buffer, so that the largest and smallest Y values are not exactly on the
-	  edge of the graph.
+    - More robust support for importing performance reports from various types of JSON schema.
+    - You can no longer toggle the offset for the rolling standard deviation line.  Instead, the standard deviation
+      line is always drawn as an offset from the rolling average line at every point along the line.
+    - The "Range to Display" value now measures individual data points, rather than calendar days.
+    - Each graph now provides a small vertical buffer, so that the largest and smallest Y values are not exactly on the
+      edge of the graph.
 
-2.1.0 (11/26/2019)
+2.1.0 (2019-11-26)
 ------------------
 The Jenkins Performance Plugin has been rebranded to be called "Watchr".  With this change comes a handful of new features.
-	- JSON is now supported as an alternate format for performance report data import.  Two styles of JSON schema
-	  are supported (see src/main/resources/gov/sandia/sems/jenkinsutilities/json folder for examples).
-	- The job configuration panel for Watchr now provides the option to force a recalculation of historical data for rolling
-	  average and standard deviation lines each time a new build is executed.
-	- The number of data points to use for the derived rolling lines (average and standard deviation) is now controlled by
-	  the same number value, to disallow the possibility of confusing graph results if the number of data points comprising
-	  the rolling average differed from the number of data points comprising the rolling standard deviation.
-	- The rolling standard deviation line can now be offset from the rolling average line at every data point.  This makes
-	  graphs that include standard deviation easier to read, as the standard deviation line is drawn closer to the other data
-	  points.
-	- Additional logging information is printed to the build console during a Jenkins job build.
-	- A number of small logic errors in unit tests have been resolved, enabling the Watchr plugin to be built from source
-	  without test failures on any major platform (Windows, Mac, or Linux).
+    - JSON is now supported as an alternate format for performance report data import.  Two styles of JSON schema
+      are supported (see src/main/resources/gov/sandia/sems/jenkinsutilities/json folder for examples).
+    - The job configuration panel for Watchr now provides the option to force a recalculation of historical data for rolling
+      average and standard deviation lines each time a new build is executed.
+    - The number of data points to use for the derived rolling lines (average and standard deviation) is now controlled by
+      the same number value, to disallow the possibility of confusing graph results if the number of data points comprising
+      the rolling average differed from the number of data points comprising the rolling standard deviation.
+    - The rolling standard deviation line can now be offset from the rolling average line at every data point.  This makes
+      graphs that include standard deviation easier to read, as the standard deviation line is drawn closer to the other data
+      points.
+    - Additional logging information is printed to the build console during a Jenkins job build.
+    - A number of small logic errors in unit tests have been resolved, enabling the Watchr plugin to be built from source
+      without test failures on any major platform (Windows, Mac, or Linux).
 
-2.0.2 (5/14/2019)
+2.0.2 (2019-05-14)
 -----------------
 Some minor internal changes to the plugin's behavior.
-	- Fixed a handful of bugs related to graphs being updated correctly as new data is added to the database over time.
+    - Fixed a handful of bugs related to graphs being updated correctly as new data is added to the database over time.
 
-2.0.1 (4/26/2019)
+2.0.1 (2019-04-26)
 -----------------
 Some minor internal changes to the plugin's behavior.
-	- When initially reading performance report XML files, the Performance Plugin will now look through subfolders recursively
-	- Some more robust logic to guard against null pointer exceptions
+    - When initially reading performance report XML files, the Performance Plugin will now look through subfolders recursively
+    - Some more robust logic to guard against null pointer exceptions
 
-2.0.0 (1/31/2019)
+2.0.0 (2019-01-31)
 -----------------
 Version 2.0.0 represents a complete overhaul from the previous iteration of the Jenkins Performance Plugin developed by
 Lawrence Allen and Derek Trumbo.  There have been a number of non-passive changes to the code.
 
-	- Complete overhaul of the directory-based database for storing hierarchical data.  Backwards compatibility with
-	  the original performance report XSD schema has been maintained.  Users of the Performance Plugin are advised to
-	  remove the performance_history_tree folder from their Jenkins job directory, and then run a fresh build of
-	  Performance Plugin-enabled jobs in order to rebuild the directory-based database with their existing performance data.
-	- New form submission controls for changing the view of graph data on the Jenkins dashboard.  Each configurable
-	  option includes a help link for further information.
-	- New configuration settings in the Post-Build Actions section of a job that has the Performance Plugin enabled.
-	  Each configurable option includes a help link for further information.
-	- More robust mechanisms for logging information and errors to the latest build's log file.
+    - Complete overhaul of the directory-based database for storing hierarchical data.  Backwards compatibility with
+      the original performance report XSD schema has been maintained.  Users of the Performance Plugin are advised to
+      remove the performance_history_tree folder from their Jenkins job directory, and then run a fresh build of
+      Performance Plugin-enabled jobs in order to rebuild the directory-based database with their existing performance data.
+    - New form submission controls for changing the view of graph data on the Jenkins dashboard.  Each configurable
+      option includes a help link for further information.
+    - New configuration settings in the Post-Build Actions section of a job that has the Performance Plugin enabled.
+      Each configurable option includes a help link for further information.
+    - More robust mechanisms for logging information and errors to the latest build's log file.

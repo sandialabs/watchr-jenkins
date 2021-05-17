@@ -1,0 +1,15 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <f:entry title="Configuration" field="watchrConfigJson">
+        <f:textarea />
+    </f:entry>
+    <f:entry title="Configuration file path" field="watchrConfigFilepath">
+        <f:textbox />
+    </f:entry>    
+    <f:entry title="Performance report directory path" field="performanceReportsLocation">
+        <f:textbox />
+    </f:entry>
+    <f:entry title="Export graphs into Jenkins workspace as standalone HTML" field="exportGraphs">
+        <f:checkbox />
+    </f:entry>    
+</j:jelly>

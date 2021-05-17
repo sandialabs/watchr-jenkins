@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<performance-report date="2019-05-02T17:08:05" name="Label_1184016106" units="seconds">
-	<timing name="Label_659361796">
-		<timing count="1" name="Label_986455119"  time-value="383.59"/>
-		<metric name="Label_-718057127"  max="754.48" min="691.086" units="MB"/>
-		<metric name="Label_-13489500"  max="215.461" min="139.527" units="MB"/>
-	</timing> 
-</performance-report>

@@ -92,9 +92,16 @@ public class StaplerRequestUtil {
         }
     }
 
-    public static String getDeletedPlotFromParameterList() throws UnsupportedEncodingException {
-        if(parameterValueExists(JenkinsConfigContext.PARAM_DELETE)) {
-            return UrlUtil.getProcessedURL(parseStringParameter(JenkinsConfigContext.PARAM_DELETE, null));
+    public static String getDeletedPlotNameFromParameterList() throws UnsupportedEncodingException {
+        if(parameterValueExists(JenkinsConfigContext.PARAM_DELETE_NAME)) {
+            return UrlUtil.getProcessedURL(parseStringParameter(JenkinsConfigContext.PARAM_DELETE_NAME, null));
+        }
+        return null;
+    }
+
+    public static String getDeletedPlotCategoryFromParameterList() throws UnsupportedEncodingException {
+        if(parameterValueExists(JenkinsConfigContext.PARAM_DELETE_CATEGORY)) {
+            return UrlUtil.getProcessedURL(parseStringParameter(JenkinsConfigContext.PARAM_DELETE_CATEGORY, null));
         }
         return null;
     }

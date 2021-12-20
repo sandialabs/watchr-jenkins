@@ -7,13 +7,18 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.acegisecurity.AccessDeniedException;
 import org.junit.Before;
 import org.junit.Test;
 
 import gov.sandia.watchr.model.JenkinsConfigContext;
+import hudson.model.FreeStyleProject;
+import hudson.model.Item;
+import hudson.model.ItemGroup;
 
 public class JenkinsHtmlFragmentGeneratorTest {
 
@@ -145,7 +150,7 @@ public class JenkinsHtmlFragmentGeneratorTest {
             expectedSb.append("<tr><td class='setting-name' style='vertical-align:middle;'>Number of Displayed Decimal Places: </td><td><input class='setting-input' name='roundTo' type='text' value='3' style='width: 200px;'></input></td></tr>");
             expectedSb.append("<tr><td class='setting-name' style='vertical-align:middle;'>Sort ascending: </td><td class='setting-main'><input class='setting-input' name='sortAscending' type='checkbox' value='true' style='width: 10px' checked></input></td></tr>");
             expectedSb.append("<tr><td><input class='submit-button primary' name='Submit' type='submit' value='submit'></input></td></tr>");
-            expectedSb.append("</table></form></td></tr></table></div><br><p style='border-bottom: 1px #DDDDDD solid;margin-bottom: 5px;margin-left: 10px;font-size: 14pt;font-weight: bold;font-variant: small-caps'>Pages</p><p style='margin-left:10px'><strong>1</strong></p>");
+            expectedSb.append("</table></form></td></tr></table></div><br><p style='border-bottom: 1px #DDDDDD solid;margin-bottom: 5px;margin-left: 10px;font-size: 14pt;font-weight: bold;font-variant: small-caps'>Pages</p><p style='margin-left:10px'></p>");
             String actual = fragmentGenerator.buildMenuBar(context, -1);
             assertEquals(expectedSb.toString(), actual);
         } catch(UnsupportedEncodingException e) {
@@ -156,9 +161,22 @@ public class JenkinsHtmlFragmentGeneratorTest {
     private JenkinsConfigContext getDummyConfigContext() {
         try {
             File emptyDir = Files.createTempDirectory(null).toFile();
-            String TEST_DATABASE = "MyDatabase";
 
-            return new JenkinsConfigContext(TEST_DATABASE, emptyDir);
+            ItemGroup<Item> parent = new ItemGroup<Item>() {
+                @Override public File getRootDir() { return emptyDir; }
+                @Override public void save() throws IOException { }
+                @Override public String getDisplayName() { return null; }
+                @Override public String getFullDisplayName() { return null; }
+                @Override public String getFullName() { return null; }
+                @Override public Item getItem(String arg0) throws AccessDeniedException { return null; }
+                @Override public Collection<Item> getItems() { return null; }
+                @Override public File getRootDirFor(Item arg0) { return null; }
+                @Override public String getUrl() { return null; }
+                @Override public String getUrlChildPrefix() { return null; }
+                @Override public void onDeleted(Item arg0) throws IOException { }
+            };
+            FreeStyleProject job = new FreeStyleProject(parent, "MyDatabase");
+            return new JenkinsConfigContext(job);
         } catch(IOException e) {
             fail(e.getMessage());
         }

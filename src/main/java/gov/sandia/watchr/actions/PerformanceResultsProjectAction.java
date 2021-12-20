@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import gov.sandia.watchr.WatchrCoreApp;
 import gov.sandia.watchr.WatchrJenkinsApp;
 import gov.sandia.watchr.config.GraphDisplayConfig;
+import gov.sandia.watchr.config.GraphDisplayConfig.LeafNodeStrategy;
 import gov.sandia.watchr.graph.JenkinsHtmlFragmentGenerator;
 import gov.sandia.watchr.graph.library.GraphOperationMetadata;
 import gov.sandia.watchr.graph.library.GraphOperationResult;
@@ -46,6 +47,7 @@ public final class PerformanceResultsProjectAction implements ProminentProjectAc
 
     public PerformanceResultsProjectAction(Job<?, ?> job) {
         this.job = job;
+        WatchrJenkinsApp.useAndGetLoggerForJob(job);
     }
 
     //////////////
@@ -78,11 +80,12 @@ public final class PerformanceResultsProjectAction implements ProminentProjectAc
      * Called from the PerformanceResultsProjectAction index.jelly to initialize
      * the HtmlGenerator object.
      */
-    public void createHtmlGenerator() {
-        WatchrCoreApp app = WatchrCoreApp.getInstance();
-
+    public void createHtmlGenerator() {        
         updateGraphConfigurationOnPageLoad();
-        app.getLogger().logInfo(StaplerRequestUtil.echoCurrentStaplerRequest());
+
+        ILogger logger = WatchrJenkinsApp.useAndGetLoggerForJob(job);
+        logger.logInfo(StaplerRequestUtil.echoCurrentStaplerRequest());
+
         deleteAnyPlotsOnPageLoad();
     }
     
@@ -101,17 +104,20 @@ public final class PerformanceResultsProjectAction implements ProminentProjectAc
      * @return A String representing the HTML for the graph header menu.
      */
     public String getHTML() {
+        
+        WatchrCoreApp coreApp = WatchrJenkinsApp.getAppForJob(job);
         StringBuilder htmlSb = new StringBuilder();
         JenkinsHtmlFragmentGenerator fragmentGenerator = new JenkinsHtmlFragmentGenerator();
 
         try {
-            JenkinsConfigContext configContext = WatchrJenkinsApp.getConfigContext(job);
+            JenkinsConfigContext configContext = WatchrJenkinsApp.getConfigContextOrDefault(job);
             GraphDisplayConfig plotConfiguration = configContext.getGraphDisplayConfig();      
-            plotConfiguration.setTravelUpIfEmpty(true);
+            plotConfiguration.setLeafNodeStrategy(LeafNodeStrategy.TRAVEL_UP_TO_PARENT);
             String dbName = configContext.getDatabaseName();
 
-            GraphOperationResult graphResult =
-                WatchrCoreApp.getInstance().getGraphHtml(dbName, plotConfiguration, false);
+            coreApp.getLogger().logInfo(plotConfiguration.toString());
+
+            GraphOperationResult graphResult = coreApp.getGraphHtml(dbName, plotConfiguration, false);
 
             if(graphResult.getMetadata().keySet().contains(GraphOperationMetadata.PLOT_DB_LOCATION.get())) {
                 plotConfiguration.setLastPlotDbLocation(graphResult.getMetadata().get(GraphOperationMetadata.PLOT_DB_LOCATION.get()));
@@ -125,8 +131,7 @@ public final class PerformanceResultsProjectAction implements ProminentProjectAc
             htmlSb.append(fragmentGenerator.buildMenuBar(configContext, numberOfGraphs));
             htmlSb.append(graphResult.getHtml());
         } catch(Exception e) {
-            ILogger logger = WatchrJenkinsApp.useAndGetLoggerForJob(job);
-            logger.logError("getHTML Error:", e);
+            coreApp.getLogger().logError("getHTML Error:", e);
         }
 
         return htmlSb.toString();
@@ -137,37 +142,37 @@ public final class PerformanceResultsProjectAction implements ProminentProjectAc
     /////////////
 
     private void updateGraphConfigurationOnPageLoad() {
+        ILogger logger = WatchrJenkinsApp.useAndGetLoggerForJob(job);
         try {
             JenkinsConfigContext context = WatchrJenkinsApp.getConfigContextOrDefault(job);
             StaplerRequestUtil.updateGraphDisplayConfigFromParameterList(context.getGraphDisplayConfig());
-            WatchrJenkinsApp.putConfigContext(job, context);
+            WatchrJenkinsApp.addConfigContext(context);
         } catch(UnsupportedEncodingException e) {
-            ILogger logger = WatchrJenkinsApp.useAndGetLoggerForJob(job);
             logger.logError("Error occurred updating HTML generator settings from the sent parameter list.", e);
         }
     }
 
     private void deleteAnyPlotsOnPageLoad() {
+        WatchrCoreApp coreApp = WatchrJenkinsApp.getAppForJob(job);
+        ILogger logger = WatchrJenkinsApp.useAndGetLoggerForJob(job);
+        
         try {
-            WatchrCoreApp app = WatchrCoreApp.getInstance();
-            String deletedPlot = StaplerRequestUtil.getDeletedPlotFromParameterList();
-            if(StringUtils.isNotBlank(deletedPlot)) {
-                app.getLogger().logInfo("Attempting delete (watchr-jenkins)");
-                app.getLogger().logInfo("Deleted plot is called " + deletedPlot);
+            String deletedPlotName     = StaplerRequestUtil.getDeletedPlotNameFromParameterList();
+            String deletedPlotCategory = StaplerRequestUtil.getDeletedPlotCategoryFromParameterList();
+            
+            if(StringUtils.isNotBlank(deletedPlotName)) {
+                String logInfoMessage = 
+                    "Attempting to delete " + deletedPlotName + " from category " + deletedPlotCategory + " (watchr-jenkins)";
+                logger.logInfo(logInfoMessage);
                 JenkinsConfigContext context = WatchrJenkinsApp.getConfigContextOrDefault(job);
-                GraphDisplayConfig graphDisplayConfig = context.getGraphDisplayConfig();
-
-                app.getLogger().logInfo("Using db " + context.getDatabaseName() + " with category " + graphDisplayConfig.getDisplayCategory());
-                app.deletePlotFromDatabase(
-                    context.getDatabaseName(),
-                    deletedPlot,
-                    graphDisplayConfig.getDisplayCategory()
+                coreApp.deletePlotFromDatabase(
+                    context.getDatabaseName(), deletedPlotName, deletedPlotCategory
                 );
+                coreApp.saveDatabase(context.getDatabaseName());
             } else {
-                app.getLogger().logInfo("Nothing to delete (watchr-jenkins)");
+                logger.logInfo("Nothing to delete (watchr-jenkins)");
             }
         } catch(UnsupportedEncodingException e) {
-            ILogger logger = WatchrJenkinsApp.useAndGetLoggerForJob(job);
             logger.logError("Error occurred deleting plot.", e);
         }
     }

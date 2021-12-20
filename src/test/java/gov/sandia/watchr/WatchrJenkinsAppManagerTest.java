@@ -1,6 +1,6 @@
 package gov.sandia.watchr;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -15,7 +15,7 @@ public class WatchrJenkinsAppManagerTest {
     @Test
     public void testGetConfigContext_Blank() {
         
-        JenkinsConfigContext context = WatchrJenkinsApp.getConfigContext(job);
-        assertNull(context);
+        JenkinsConfigContext context = WatchrJenkinsApp.getConfigContextOrDefault(job);
+        assertNotNull(context);
     }
 }

@@ -7,14 +7,15 @@
 ******************************************************************************/
 package gov.sandia.watchr.model;
 
-import java.io.File;
 import java.util.Set;
 
 import gov.sandia.watchr.WatchrCoreApp;
 import gov.sandia.watchr.WatchrJenkinsApp;
 import gov.sandia.watchr.config.GraphDisplayConfig;
 import gov.sandia.watchr.config.GraphDisplayConfig.GraphDisplaySort;
+import gov.sandia.watchr.log.ILogger;
 import gov.sandia.watchr.util.CommonConstants;
+import hudson.model.Job;
 
 public class JenkinsConfigContext {
 
@@ -31,7 +32,8 @@ public class JenkinsConfigContext {
     public static final String PARAM_GRAPHS_PER_ROW      = "graphsPerRow";
     public static final String PARAM_ROUND_TO            = "roundTo";
     public static final String PARAM_SORT_ASCENDING      = "sortAscending";
-    public static final String PARAM_DELETE              = "delete";
+    public static final String PARAM_DELETE_NAME         = "deleteName";
+    public static final String PARAM_DELETE_CATEGORY     = "deleteCategory";
 
     public static final String  PARAM_DFLT_PATH           = CommonConstants.ROOT_PATH_ALIAS;
     public static final int     PARAM_DFLT_PAGE           = 1;    
@@ -46,19 +48,17 @@ public class JenkinsConfigContext {
     public static final GraphDisplaySort PARAM_DFLT_SORT_ASCENDING = GraphDisplaySort.ASCENDING;
 
     private GraphDisplayConfig graphDisplayConfig;
-    private String databaseName;
-    private File databaseRootDir;
 
-    public JenkinsConfigContext(String databaseName, File databaseRootDir) {
-        this.databaseName = databaseName;
-        this.databaseRootDir = databaseRootDir;
+    private final Job<?,?> job;
 
-        File dbDir = new File(databaseRootDir, "db");
-        WatchrJenkinsApp.loadDatabase(databaseName, dbDir);
+    public JenkinsConfigContext(Job<?,?> job) {
+        this.job = job;
+        WatchrJenkinsApp.loadDatabase(job);
 
-        graphDisplayConfig = WatchrCoreApp.getInstance().getDatabaseGraphDisplayConfiguration(databaseName);
+        WatchrCoreApp app = WatchrJenkinsApp.getAppForJob(job);
+        graphDisplayConfig = app.getDatabaseGraphDisplayConfiguration(getDatabaseName());
         if(graphDisplayConfig == null) {
-            graphDisplayConfig = new GraphDisplayConfig("");
+            graphDisplayConfig = new GraphDisplayConfig("", app.getLogger());
             graphDisplayConfig.setNextPlotDbLocation(PARAM_DFLT_PATH);
             graphDisplayConfig.setLastPlotDbLocation(PARAM_DFLT_PATH);
             graphDisplayConfig.setPage(PARAM_DFLT_PAGE);
@@ -77,8 +77,12 @@ public class JenkinsConfigContext {
     // GETTERS //
     /////////////
 
+    public Job<?,?> getJob() {
+        return job;
+    }
+
     public String getDatabaseName() {
-        return databaseName;
+        return job.getName();
     }
 
     public GraphDisplayConfig getGraphDisplayConfig() {
@@ -86,20 +90,32 @@ public class JenkinsConfigContext {
     }
     
     public Set<String> getCategories() {
-        File dbDir = new File(databaseRootDir, "db");
-        WatchrJenkinsApp.loadDatabase(databaseName, dbDir);
-        return WatchrCoreApp.getInstance().getDatabaseCategories(databaseName);
+        WatchrJenkinsApp.loadDatabase(job);
+        WatchrCoreApp app = WatchrJenkinsApp.getAppForJob(job);
+        Set<String> categories = app.getDatabaseCategories(getDatabaseName());
+
+        ILogger logger = app.getLogger();
+        logger.logInfo(categories.toString());
+        return categories;
     }
 
     public int getNumberOfPlots() {
-        File dbDir = new File(databaseRootDir, "db");
-        WatchrJenkinsApp.loadDatabase(databaseName, dbDir);
-        return WatchrCoreApp.getInstance().getPlotsSize(databaseName);
+        WatchrJenkinsApp.loadDatabase(job);
+        WatchrCoreApp app = WatchrJenkinsApp.getAppForJob(job);
+        int plotNumber = app.getPlotsSize(getDatabaseName());
+
+        ILogger logger = app.getLogger();
+        logger.logInfo("Number of plots: " + plotNumber);
+        return plotNumber;
     }
 
     public int getNumberOfFailedPlots() {
-        File dbDir = new File(databaseRootDir, "db");
-        WatchrJenkinsApp.loadDatabase(databaseName, dbDir);
-        return WatchrCoreApp.getInstance().getFailedPlotsSize(databaseName);
+        WatchrJenkinsApp.loadDatabase(job);
+        WatchrCoreApp app = WatchrJenkinsApp.getAppForJob(job);
+        int plotNumber = app.getFailedPlotsSize(getDatabaseName());
+
+        ILogger logger = app.getLogger();
+        logger.logInfo("Number of failed plots: " + plotNumber);
+        return plotNumber;
     }
 }
